@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/microphone"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:clickable="true"-->
+<!--        android:src="@drawable/ic_microphone"-->
+<!--        android:visibility="visible" />-->
+
+
+    <!--    floating add button start-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:src="@drawable/ic_add"
+        app:pressedTranslationZ="12dp"
+        tools:srcCompat="@tools:sample/backgrounds/scenic"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        app:backgroundTint="@color/cardview_light_background"/>
+    <!--    floating add button end-->
+
+
+    <!--    start linear layout-->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:scrollbarAlwaysDrawVerticalTrack="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@drawable/gradient"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:padding="0dp"
+        android:layout_marginBottom="0dp">
+
+        <ImageButton
+            android:id="@+id/microphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_microphone"
+            android:background="@color/cardview_shadow_end_color"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
+
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Enter your task here..."
+            android:layout_marginHorizontal="0dp"
+            android:textColor="#FFFFFF"
+            android:visibility="visible"
+            android:layout_gravity="center"
+            android:cursorVisible="true"
+            android:textCursorDrawable="@drawable/cursor"
+
+            />
+        <ImageButton
+            android:id="@+id/single_done1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_single_done"
+            android:background="@color/cardview_shadow_end_color"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:visibility="gone"/>
+    </LinearLayout>
+    <!--    end of linear layout-->
+
+
+
+
+
+</RelativeLayout>

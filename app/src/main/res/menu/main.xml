@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:title="Search"
+        android:id="@+id/it_search"
+        android:orderInCategory="101"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_search"
+        />
+    <item android:title="Dropdown"
+
+        android:id="@+id/it_dropdown"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_dropdown"
+
+        />
+    <item android:title="Task Lists"
+        android:id="@+id/it_taskLists"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item android:title="Follow me"
+        android:id="@+id/it_followMe"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item android:title="Settings"
+        android:id="@+id/it_settings"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+
+</menu>
