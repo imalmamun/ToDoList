@@ -67,6 +67,9 @@ public class TaskAdapterClass extends RecyclerView.Adapter<TaskAdapterClass.View
         this.notifyItemRemoved(positon);
         alltask.remove(positon);
     }
+    public void placeIT(int fposition, int lposition){
+
+    }
 //    public void setTasks(List<TaskModelClass> storeAllData){
 //        this.alltask = storeAllData;
 //        notifyDataSetChanged();

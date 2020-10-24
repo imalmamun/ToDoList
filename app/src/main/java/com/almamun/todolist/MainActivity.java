@@ -27,7 +27,10 @@ import com.almamun.todolist.Util.RecyclerTouchListener;
 import com.almamun.todolist.database.DatabaseHelperClass;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.security.cert.CollectionCertStoreParameters;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -127,10 +130,21 @@ public boolean onCreateOptionsMenu(Menu menu) {
             final TaskAdapterClass taskAdapterClass = new TaskAdapterClass(storeAllData,MainActivity.this);
             recyclerView.setAdapter(taskAdapterClass);
             taskAdapterClass.notifyDataSetChanged();
-            new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+//            ItemTouchHelper.UP|ItemTouchHelper.DOWN
+            new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
                 @Override
                 public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+//                    final int fromPosition = viewHolder.getAdapterPosition();
+//                    final int toPosition = target.getAdapterPosition();
+//
+//                    Toast.makeText(MainActivity.this, String.valueOf(fromPosition), Toast.LENGTH_SHORT).show();
+//                    Collections.swap(taskAdapterClass.alltask, fromPosition, toPosition);
+//                    taskAdapterClass.notifyDataSetChanged();
+//                    taskAdapterClass.notifyItemMoved(fromPosition, toPosition);
+
+
                     return false;
+
                 }
                 @Override
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
@@ -142,12 +156,11 @@ public boolean onCreateOptionsMenu(Menu menu) {
                         String a = String.valueOf(position);
 //                        databaseHelperClass.deleteTask(position);
 //                        storeAllData.remove(position);
-//                        taskAdapterClass.notifyDataSetChanged();
+                        taskAdapterClass.notifyDataSetChanged();
                         Toast.makeText(MainActivity.this,"Task Deleted", Toast.LENGTH_SHORT).show();
                     }catch (Exception e){
                         Toast.makeText(MainActivity.this,"Some problem occurred", Toast.LENGTH_SHORT).show();
                     }
-//                databaseHelperClass.deleteTask(id);
                 }
             }).attachToRecyclerView(recyclerView);
         }else{
@@ -171,17 +184,11 @@ public boolean onCreateOptionsMenu(Menu menu) {
                     recyclerView.setAdapter(taskAdapterClass);
                     //                        taskAdapterClass.setTasks(storeAllData);
                     taskAdapterClass.notifyDataSetChanged();
-                }else{
-                }
+                }else{ }
                 taskModelClass = storeAllData.get(position);
 
-
-
 //                Toast.makeText(MainActivity.this,taskModelClass.toString(), Toast.LENGTH_SHORT).show();
-
-
             }
-
             @Override
             public void onLongClick(View view, int position) {
 //                Toast.makeText(MainActivity.this, position+"Long click successful", Toast.LENGTH_SHORT).show();
@@ -194,10 +201,7 @@ public boolean onCreateOptionsMenu(Menu menu) {
                 i.putExtra("k1",message);
                 i.putExtra("k2",storeAllData.get(position).getId());
                 i.putExtra("k3",pass);
-
-                startActivity(i);
-
-            }
+                startActivity(i); }
         }));
 
 
