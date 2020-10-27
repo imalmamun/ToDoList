@@ -131,7 +131,7 @@ public boolean onCreateOptionsMenu(Menu menu) {
             recyclerView.setAdapter(taskAdapterClass);
             taskAdapterClass.notifyDataSetChanged();
 //            ItemTouchHelper.UP|ItemTouchHelper.DOWN
-            new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
+            new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
                 @Override
                 public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
 //                    final int fromPosition = viewHolder.getAdapterPosition();
@@ -149,18 +149,61 @@ public boolean onCreateOptionsMenu(Menu menu) {
                 @Override
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 //                long id = viewHolder.getAdapterPosition();
-                    try {
+                    if(direction == ItemTouchHelper.RIGHT){
+                        try {
 //                        int idi = (int)viewHolder.itemView.getTag();
-                        int position = viewHolder.getAdapterPosition();
-                        taskAdapterClass.delete(position);
-                        String a = String.valueOf(position);
+                            int position = viewHolder.getAdapterPosition();
+                            taskAdapterClass.delete(position);
+//                        storeAllData.remove(position);
+                            String a = String.valueOf(position);
+                            storeAllData = databaseHelperClass.getTaskList();
+                            if(storeAllData != null){
+                                TaskAdapterClass taskAdapterClass = new TaskAdapterClass(storeAllData,MainActivity.this);
+                                recyclerView.setAdapter(taskAdapterClass);
+                                //                        taskAdapterClass.setTasks(storeAllData);
+                                taskAdapterClass.notifyDataSetChanged();
+//                            taskAdapterClass.notifyItemRemoved(position);
+                            }else{
+                                Toast.makeText(update, "There is no data", Toast.LENGTH_SHORT).show();
+                            }
 //                        databaseHelperClass.deleteTask(position);
 //                        storeAllData.remove(position);
-                        taskAdapterClass.notifyDataSetChanged();
-                        Toast.makeText(MainActivity.this,"Task Deleted", Toast.LENGTH_SHORT).show();
-                    }catch (Exception e){
-                        Toast.makeText(MainActivity.this,"Some problem occurred", Toast.LENGTH_SHORT).show();
+                            taskAdapterClass.notifyDataSetChanged();
+                            taskAdapterClass.notifyItemRemoved(position);
+                            Toast.makeText(MainActivity.this,"Task Deleted", Toast.LENGTH_SHORT).show();
+
+                        }catch (Exception e){
+                            Toast.makeText(MainActivity.this,"Some problem occurred", Toast.LENGTH_SHORT).show();
+                        }
                     }
+                    else if(direction == ItemTouchHelper.LEFT){
+                        Toast.makeText(MainActivity.this, "Update mode activated", Toast.LENGTH_SHORT).show();
+                        int position = viewHolder.getAdapterPosition();
+                        TaskModelClass taskModelClass;
+                        taskModelClass = storeAllData.get(position);
+                        String message = taskModelClass.getTasktext();
+                        String id = String.valueOf(taskModelClass.getId());
+                        String pass = "mamun";
+                        Intent i = new Intent(MainActivity.this, Update.class);
+                        i.putExtra("k1",message);
+                        i.putExtra("k2",storeAllData.get(position).getId());
+                        i.putExtra("k3",pass);
+                        storeAllData = databaseHelperClass.getTaskList();
+                        if(storeAllData != null){
+                            TaskAdapterClass taskAdapterClass = new TaskAdapterClass(storeAllData,MainActivity.this);
+                            recyclerView.setAdapter(taskAdapterClass);
+                            //                        taskAdapterClass.setTasks(storeAllData);
+                            taskAdapterClass.notifyDataSetChanged();
+//                            taskAdapterClass.notifyItemRemoved(position);
+                        }else{
+                            Toast.makeText(update, "There is no data", Toast.LENGTH_SHORT).show();
+                        }
+                        startActivity(i);
+                    }
+                    else {
+
+                    }
+
                 }
             }).attachToRecyclerView(recyclerView);
         }else{
@@ -184,7 +227,9 @@ public boolean onCreateOptionsMenu(Menu menu) {
                     recyclerView.setAdapter(taskAdapterClass);
                     //                        taskAdapterClass.setTasks(storeAllData);
                     taskAdapterClass.notifyDataSetChanged();
-                }else{ }
+                }else{
+                    Toast.makeText(update, "There is no data", Toast.LENGTH_SHORT).show();
+                }
                 taskModelClass = storeAllData.get(position);
 
 //                Toast.makeText(MainActivity.this,taskModelClass.toString(), Toast.LENGTH_SHORT).show();
@@ -192,16 +237,8 @@ public boolean onCreateOptionsMenu(Menu menu) {
             @Override
             public void onLongClick(View view, int position) {
 //                Toast.makeText(MainActivity.this, position+"Long click successful", Toast.LENGTH_SHORT).show();
-                TaskModelClass taskModelClass;
-                taskModelClass = storeAllData.get(position);
-                String message = taskModelClass.getTasktext();
-                String id = String.valueOf(taskModelClass.getId());
-                String pass = "mamun";
-                Intent i = new Intent(MainActivity.this, Update.class);
-                i.putExtra("k1",message);
-                i.putExtra("k2",storeAllData.get(position).getId());
-                i.putExtra("k3",pass);
-                startActivity(i); }
+
+            }
         }));
 
 

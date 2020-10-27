@@ -21,10 +21,12 @@ public class TaskAdapterClass extends RecyclerView.Adapter<TaskAdapterClass.View
     DatabaseHelperClass databaseHelperClass;
 
     public TaskAdapterClass(List<TaskModelClass> storeAllData, MainActivity mainActivity) {
+
         this.alltask = storeAllData;
         this.context = mainActivity;
         databaseHelperClass = new DatabaseHelperClass(context);
     }
+
 
 
     @NonNull
