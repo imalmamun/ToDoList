@@ -1,6 +1,7 @@
 package com.almamun.todolist;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,11 +42,14 @@ public class TaskAdapterClass extends RecyclerView.Adapter<TaskAdapterClass.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final TaskModelClass taskModelClass = alltask.get(position);
+
         holder.checkBox.setText(taskModelClass.getTasktext());
         if(taskModelClass.getStatus() == true){
             holder.checkBox.setChecked(true);
+            holder.checkBox.setPaintFlags(holder.checkBox.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }else if(taskModelClass.getStatus() == false){
             holder.checkBox.setChecked(false);
+            holder.checkBox.setPaintFlags(holder.checkBox.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
         }
         else{
 
@@ -96,6 +100,7 @@ public class TaskAdapterClass extends RecyclerView.Adapter<TaskAdapterClass.View
 //                    }
 //                }
 //            });
+
         }
     }
 }
