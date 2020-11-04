@@ -1,6 +1,7 @@
 package com.almamun.todolist;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,9 +48,13 @@ public class TaskAdapterClass extends RecyclerView.Adapter<TaskAdapterClass.View
         if(taskModelClass.getStatus() == true){
             holder.checkBox.setChecked(true);
             holder.checkBox.setPaintFlags(holder.checkBox.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.checkBox.setTextColor(Color.parseColor("#FFFFFF"));
+
+
         }else if(taskModelClass.getStatus() == false){
             holder.checkBox.setChecked(false);
             holder.checkBox.setPaintFlags(holder.checkBox.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+
         }
         else{
 

@@ -5,28 +5,34 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.almamun.todolist.Modelclass.TaskModelClass;
 import com.almamun.todolist.database.DatabaseHelperClass;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 public class MainActivity2 extends AppCompatActivity {
     private static final int REQUEST_CODE_SPEECH_INPUT2 = 2;
-    public FloatingActionButton microphone;
+    public FloatingActionButton microphone,time;
     public TaskModelClass taskModelClass;
-    public EditText editText1;
+    public EditText editText1,editText2;
+    int hour,minutee;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -41,9 +47,10 @@ public class MainActivity2 extends AppCompatActivity {
             if(editText1.getText().length() == 0){
                 Toast.makeText(this,"Please Enter Your Task", Toast.LENGTH_SHORT).show();
             }else {
-                TaskModelClass taskModelClass;
+                if(!TextUtils.isEmpty(editText2.getText().toString())){
+                    TaskModelClass taskModelClass;
                     try {
-                        taskModelClass = new TaskModelClass(-1, false, editText1.getText().toString() );
+                        taskModelClass = new TaskModelClass(-1, false, editText1.getText()+"\n"+editText2.getText().toString() );
                         Toast.makeText(this, "Task Added", Toast.LENGTH_SHORT).show();
                     }catch (Exception e){
                         Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();
@@ -52,6 +59,21 @@ public class MainActivity2 extends AppCompatActivity {
                     DatabaseHelperClass databaseHelperClass = new DatabaseHelperClass(MainActivity2 .this);
                     boolean success = databaseHelperClass.addTask(taskModelClass);
                     startActivity(new Intent(MainActivity2.this, MainActivity.class));
+
+                }else if(TextUtils.isEmpty(editText2.getText().toString())){
+                    TaskModelClass taskModelClass;
+                    try {
+                        taskModelClass = new TaskModelClass(-1, false, editText1.getText().toString());
+                        Toast.makeText(this, "Task Added", Toast.LENGTH_SHORT).show();
+                    }catch (Exception e){
+                        Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();
+                        taskModelClass = new TaskModelClass(-1,false,"error");
+                    }
+                    DatabaseHelperClass databaseHelperClass = new DatabaseHelperClass(MainActivity2 .this);
+                    boolean success = databaseHelperClass.addTask(taskModelClass);
+                    startActivity(new Intent(MainActivity2.this, MainActivity.class));
+                }
+
             }
         }
         return super.onOptionsItemSelected(item);
@@ -73,6 +95,8 @@ public class MainActivity2 extends AppCompatActivity {
 //        mapping start here
         microphone = findViewById(R.id.microphone);
         editText1 = findViewById(R.id.editText1);
+        time = findViewById(R.id.time);
+        editText2 = findViewById(R.id.editText2);
 
 
 
@@ -96,6 +120,30 @@ public class MainActivity2 extends AppCompatActivity {
 
 
         });
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity2.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        hour = hourOfDay;
+                        minutee= minute;
+                        Calendar cal = Calendar.getInstance();
+                        cal.set(0,0,0,hour,minutee);
+                        Toast.makeText(MainActivity2.this, cal.getTime().toString(), Toast.LENGTH_SHORT).show();
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
+
+                        editText2.setText(simpleDateFormat.format(cal.getTime()));
+
+                    }
+                },12,0,false
+                );
+                timePickerDialog.updateTime(hour,minutee);
+                timePickerDialog.show();
+
+            }
+        });
+
 
     }
     @Override

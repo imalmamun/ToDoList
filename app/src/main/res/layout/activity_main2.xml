@@ -47,7 +47,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Due date?"
+        android:text="Due time?"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/editText1"
@@ -63,16 +63,16 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="50dp"
 
-        android:hint="Set date..."
+        android:hint="Set time..."
         android:textColor="@color/design_default_color_primary"
         />
 
 <!--    calender start-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/calendar"
+        android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_calendar"
+        android:src="@drawable/ic_time"
         android:clickable="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
