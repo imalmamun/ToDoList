@@ -5,30 +5,36 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.almamun.todolist.Modelclass.TaskModelClass;
 import com.almamun.todolist.database.DatabaseHelperClass;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class Update extends AppCompatActivity {
     private static final int REQUEST_CODE_SPEECH_INPUT2 = 2;
 //    public static final String MESSAGE_KEY = "hi";
-    public FloatingActionButton microphone;
-    public EditText editText1;
+    public FloatingActionButton microphone,time;
+    public EditText editText1,editText2;
 
     public TaskModelClass taskModelClass;
     public DatabaseHelperClass databaseHelperClass;
+    int hour, minutee;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,20 +62,35 @@ public class Update extends AppCompatActivity {
                 Toast.makeText(this,"Please Enter Your Task", Toast.LENGTH_SHORT).show();
 
             }else{
-
-                TaskModelClass taskModelClass;
-                try {
-                    taskModelClass = new TaskModelClass(m, false, editText1.getText().toString());
+                if(!TextUtils.isEmpty(editText2.getText().toString())){
+                    TaskModelClass taskModelClass;
+                    try {
+                        taskModelClass = new TaskModelClass(m, false, editText1.getText()+"\n"+editText2.getText().toString());
 //                    Toast.makeText(this, taskModelClass.toString(), Toast.LENGTH_SHORT).show();
-                    DatabaseHelperClass databaseHelperClass = new DatabaseHelperClass(Update.this);
-                    databaseHelperClass.updateValue(taskModelClass);
-                    startActivity(new Intent(Update.this, MainActivity.class));
-                    Toast.makeText(this,"Successfully Updated", Toast.LENGTH_SHORT).show();
-                }catch (Exception e){
-                    Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        DatabaseHelperClass databaseHelperClass = new DatabaseHelperClass(Update.this);
+                        databaseHelperClass.updateValue(taskModelClass);
+                        startActivity(new Intent(Update.this, MainActivity.class));
+                        Toast.makeText(this,"Successfully Updated", Toast.LENGTH_SHORT).show();
+                    }catch (Exception e){
+                        Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 //                    taskModelClass = new TaskModelClass(-1,false,"error");
+                    }
+                }else{
+                    TaskModelClass taskModelClass;
+                    try {
+                        taskModelClass = new TaskModelClass(m, false, editText1.getText().toString());
+//                    Toast.makeText(this, taskModelClass.toString(), Toast.LENGTH_SHORT).show();
+                        DatabaseHelperClass databaseHelperClass = new DatabaseHelperClass(Update.this);
+                        databaseHelperClass.updateValue(taskModelClass);
+                        startActivity(new Intent(Update.this, MainActivity.class));
+                        Toast.makeText(this,"Successfully Updated", Toast.LENGTH_SHORT).show();
+                    }catch (Exception e){
+                        Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//                    taskModelClass = new TaskModelClass(-1,false,"error");
+                    }
                 }
-//            Toast.makeText(this, "success = " + success, Toast.LENGTH_SHORT).show();
+
+
             }
         }
 
@@ -102,6 +123,8 @@ public class Update extends AppCompatActivity {
 //        actionBar.setDisplayHomeAsUpEnabled(true);
         microphone = findViewById(R.id.microphone);
         editText1 = findViewById(R.id.editText1);
+        time = findViewById(R.id.time);
+        editText2 = findViewById(R.id.editText2);
 //        editText1.setText(taskModelClass.getTasktext());
 //        Intent ii = getIntent();
 //        Bundle b = ii.getExtras();
@@ -134,6 +157,30 @@ public class Update extends AppCompatActivity {
 
 
         });
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(Update.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        hour = hourOfDay;
+                        minutee= minute;
+                        Calendar cal = Calendar.getInstance();
+                        cal.set(0,0,0,hour,minutee);
+                        Toast.makeText(Update.this, cal.getTime().toString(), Toast.LENGTH_SHORT).show();
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
+
+                        editText2.setText(simpleDateFormat.format(cal.getTime()));
+
+                    }
+                },12,0,false
+                );
+                timePickerDialog.updateTime(hour,minutee);
+                timePickerDialog.show();
+
+            }
+        });
+
 
     }
 

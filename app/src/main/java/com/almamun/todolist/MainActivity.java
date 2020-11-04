@@ -295,6 +295,7 @@ public boolean onCreateOptionsMenu(Menu menu) {
                         recyclerView.setAdapter(taskAdapterClass);
                         //                        taskAdapterClass.setTasks(storeAllData);
                         taskAdapterClass.notifyDataSetChanged();
+
                     }else{
                     }
 //            Toast.makeText(this, "success = " + success, Toast.LENGTH_SHORT).show();
