@@ -177,6 +177,7 @@ public boolean onCreateOptionsMenu(Menu menu) {
                         }
                     }
                     else if(direction == ItemTouchHelper.LEFT){
+                        Toast.makeText(MainActivity.this, storeAllData.get(2).getTasktext().toString(), Toast.LENGTH_SHORT).show();
                         Toast.makeText(MainActivity.this, "Update mode activated", Toast.LENGTH_SHORT).show();
                         int position = viewHolder.getAdapterPosition();
                         TaskModelClass taskModelClass;

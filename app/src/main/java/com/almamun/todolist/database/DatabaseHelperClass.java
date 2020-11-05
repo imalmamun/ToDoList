@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.almamun.todolist.Modelclass.TaskModelClass;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class DatabaseHelperClass extends SQLiteOpenHelper {
@@ -105,6 +107,12 @@ public class DatabaseHelperClass extends SQLiteOpenHelper {
 
             }while(cursor.moveToNext());
         }
+        Collections.sort(alltask, new Comparator<TaskModelClass>() {
+            @Override
+            public int compare(TaskModelClass o1, TaskModelClass o2) {
+                return o1.getTasktext().compareTo(o2.getTasktext());
+            }
+        });
 
         cursor.close();
         sqLiteDatabase.close();
