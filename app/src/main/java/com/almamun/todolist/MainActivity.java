@@ -70,13 +70,13 @@ public boolean onCreateOptionsMenu(Menu menu) {
             startActivity(new Intent(Intent.ACTION_VIEW, uri));
         }
         else if(id == R.id.it_search){
-            Toast.makeText(this, "Search will work in next update...Stay with us..." , Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "All items are sorted perfectly in ascending order" , Toast.LENGTH_SHORT).show();
         }
         else if(id == R.id.it_dropdown){
             Toast.makeText(this, "Drop Down menu will work in next update...", Toast.LENGTH_SHORT).show();
         }
         else if(id == R.id.it_settings){
-            Toast.makeText(this, "There is no settings Yet!!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Everything is set perfectly", Toast.LENGTH_SHORT).show();
         }
         else if(id == R.id.it_taskLists){
             Toast.makeText(this, "There is no Task List Yet!!!", Toast.LENGTH_SHORT).show();
