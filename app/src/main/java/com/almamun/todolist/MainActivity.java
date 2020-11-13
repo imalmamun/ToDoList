@@ -229,7 +229,7 @@ public boolean onCreateOptionsMenu(Menu menu) {
                     //                        taskAdapterClass.setTasks(storeAllData);
                     taskAdapterClass.notifyDataSetChanged();
                 }else{
-                    Toast.makeText(update, "There is no data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "There is no data", Toast.LENGTH_SHORT).show();
                 }
                 taskModelClass = storeAllData.get(position);
 
@@ -238,6 +238,19 @@ public boolean onCreateOptionsMenu(Menu menu) {
             @Override
             public void onLongClick(View view, int position) {
 //                Toast.makeText(MainActivity.this, position+"Long click successful", Toast.LENGTH_SHORT).show();
+                TaskModelClass taskModelClass;
+                taskModelClass = storeAllData.get(position);
+                databaseHelperClass.updateCheck(taskModelClass);
+                storeAllData = databaseHelperClass.getTaskList();
+                if(storeAllData != null){
+                    TaskAdapterClass taskAdapterClass = new TaskAdapterClass(storeAllData,MainActivity.this);
+                    recyclerView.setAdapter(taskAdapterClass);
+                    //                        taskAdapterClass.setTasks(storeAllData);
+                    taskAdapterClass.notifyDataSetChanged();
+                }else{
+                    Toast.makeText(MainActivity.this, "There is no data", Toast.LENGTH_SHORT).show();
+                }
+                taskModelClass = storeAllData.get(position);
 
             }
         }));
