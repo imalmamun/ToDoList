@@ -9,12 +9,12 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_search"
         />
-    <item android:title="Dropdown"
+    <item android:title="Timer"
 
-        android:id="@+id/it_dropdown"
+        android:id="@+id/it_timer"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:icon="@drawable/ic_dropdown"
+        android:icon="@drawable/ic_baseline_timer_24"
 
         />
     <item android:title="Task Lists"

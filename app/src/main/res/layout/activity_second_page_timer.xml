@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="#211D44">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/stopwatch"
+        android:layout_width="256dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bgcircle"
+        android:layout_marginTop="75dp"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/anchor"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/icanchor"
+        android:layout_marginTop="25dp"/>
+    <Chronometer
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFF"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/stopwatch"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_Start"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/stopwatch"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:background="@drawable/button"
+        android:text="Start"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textAllCaps="false"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_Pause"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/stopwatch"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:background="@drawable/button"
+        android:text="Pause"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textAllCaps="false"
+        android:visibility="gone"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_Stop"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/timer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:background="@drawable/button3"
+        android:text="Clean"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textAllCaps="false"/>
+
+
+
+
+</RelativeLayout>

@@ -72,8 +72,9 @@ public boolean onCreateOptionsMenu(Menu menu) {
         else if(id == R.id.it_search){
             Toast.makeText(this, "All items are sorted perfectly in ascending order" , Toast.LENGTH_SHORT).show();
         }
-        else if(id == R.id.it_dropdown){
-            Toast.makeText(this, "Drop Down menu will work in next update...", Toast.LENGTH_SHORT).show();
+        else if(id == R.id.it_timer){
+//            Toast.makeText(this, "Timer is opening", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this, FirstPageTimer.class));
         }
         else if(id == R.id.it_settings){
             Toast.makeText(this, "Everything is set perfectly", Toast.LENGTH_SHORT).show();

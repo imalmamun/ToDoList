@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_todolist_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Update"></activity>
+        <activity android:name=".SecondPageTimer"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+        <activity android:name=".FirstPageTimer"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity android:name=".Update" />
         <activity
             android:name=".MainActivity2"
             android:noHistory="true"
